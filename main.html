@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title> </title>
+<meta name="keywords" content="keywords" />
+<meta name="description" content="description" />
+
+
+</head>
+<body>
+<div id="fb-root"></div>    
+        <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php/en_US" type="text/javascript"></script>
+      <script type="text/javascript">
+      FB.init("{{ apikey }}", '/static/xd_receiver.html');
+      
+              
+        function OnRequestPermission(){
+
+          var myPermissions = "publish_stream,read_friendlists"; // permissions your app needs
+
+        FB.Connect.showPermissionDialog(myPermissions , function(perms) {
+          if (!perms)
+          {
+            // handles if the user rejects the request for permissions. This is a good place to log off from Facebook connect
+          }
+          else
+          {
+            window.location="/";
+            
+          };
+        });
+
+        }
+
+
+        </script>
+     
+<div>
+<h2>
+Welcome to  Universal connect site {{name}} &nbsp;{{logout}}!
+</h2>
+{% if not name %}
+<fb:login-button v="2" perms="offline_access,email,user_birthday,user_website,user_location" onlogin='OnRequestPermission();' size="large">Connect with Facebook</fb:login-button>
+
+{% endif %}
+{{links}}
+
+{% if uid %}<fb:profile-pic uid="{{uid}}" facebook-logo="true" width="48" height="48" linked="true"></fb:profile-pic>{% endif %}
+
+{{error}}
+
+
+</div>
+
+
+
+</body>
+</html>
